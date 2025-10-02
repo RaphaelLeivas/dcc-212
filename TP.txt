@@ -1,1 +1,102 @@
 Base de dados: https://dados.gov.br/dados/conjuntos-dados/ocorrencias-aeronauticas-da-aviacao-civil-brasileira
+
+
+## Tabela Ocorrencia
+
+codigo_ocorrencia é único na tabela ocorrência, 13185 no total
+
+ocorrencia_classificação: ['INCIDENTE', 'ACIDENTE', 'INCIDENTE GRAVE']
+* incidente: potencial em causar dano, mas não causou
+* evento que causou lesões e danos materiais
+
+ocorrencia_pais: so brasil
+
+755 aeródromos
+
+ocorrência saída pista: SIM ou NAO
+
+aeronaves envolvidas: varia de 0 a 4
+
+datas: de 2007 a 2025
+
+## Tabela Ocorrencia_tipo
+
+ocorrencia_tipo: descrição em português, 87 tipos
+* categoria é a mesma coisa
+* interessante obter o tipo de ocorrência mais frequente e tal
+
+13900 entradas, uma para cada ocorrencia
+
+## Tabela Aeronave
+
+temos 13301 entradas, uma para cada ocorrencia
+
+numero de matriculas (avioes individuais): 6821
+
+aeronave_tipo-veiculo: 
+
+['AVIÃO', '***', 'ULTRALEVE', 'HELICÓPTERO', 'GIROCÓPTERO',
+'ANFÍBIO', 'PLANADOR', 'DIRIGÍVEL', 'DRONE', nan, 'BALÃO',
+'ANFIBIO', 'TRIKE', 'HIDROAVIÃO']
+
+aeronave fabricante: 348 empresas (embraer, etc)
+
+aeronave_motor_tipo: 
+
+[nan, '***', 'TURBOÉLICE', 'JATO', 'PISTÃO', 'TURBOEIXO',
+'SEM TRAÇÃO']
+
+aeronave_pmd_categoria = aeronave_pmd que é um numero real ⇒ peso máximo de decolagem
+
+aeronave_voo_origem: aerodromo de origem 971 no total, destino são 960
+
+36 fases de operação: quando o acidente aconteceu:
+
+['DESCIDA', 'SUBIDA', 'DECOLAGEM', 'CRUZEIRO', 'POUSO', 'TÁXI',
+'APROXIMAÇÃO FINAL', 'MANOBRA', 'INDETERMINADA',
+'INSPEÇÃO DE TRÂNSITO/INTERVOO', 'ESTACIONAMENTO', 'OUTRA FASE',
+'PUSHBACK', 'PROCEDIMENTO DE APROXIMAÇÃO IFR', 'ARREMETIDA NO AR',
+'CIRCUITO DE TRÁFEGO', 'CHEQUE DE MOTOR OU ROTOR',
+'PARTIDA DO MOTOR', 'NÃO IDENTIFICADA', 'PAIRADO',
+'REVISÃO DE PISTA', 'CORRIDA APÓS POUSO', 'VOO A BAIXA ALTURA',
+nan, 'OPERAÇÃO DE SOLO', 'ARREMETIDA NO SOLO',
+'DECOLAGEM VERTICAL', 'RETA FINAL', '***', 'DESCIDA DE EMERGÊNCIA',
+'ESPECIALIZADA', 'SAÍDA IFR', 'EMPREGO MILITAR',
+'MUDANÇA DE NÍVEL OU ALTITUDE', 'DESCIDA DESCONTROLADA', 'ESPERA']
+
+tipo operacao: 
+
+['REGULAR', 'PRIVADA', 'ESPECIALIZADA', 'TÁXI AÉREO',
+'EXPERIMENTAL', '***', 'AERODESPORTIVA', 'AGRÍCOLA', 'POLICIAL',
+'INSTRUÇÃO', 'NÃO REGULAR', nan]
+
+nivel_dano: ['NENHUM', 'LEVE', 'SUBSTANCIAL', 'DESTRUÍDA', '***', nan] 
+
+fatalidades_total: 
+
+[  0.,   1.,   2.,   3.,  10.,   5.,   6.,  62.,  nan,   7.,   4.,
+12.,  14.,   8.,  16.,  24., 199.]
+
+## Tabela Fator Contribuinte
+
+fator_nome: total 74
+
+fator_aspecto: 
+
+['DESEMPENHO DO SER HUMANO', 'ASPECTO PSICOLÓGICO',
+'ELEMENTOS RELACIONADOS AO AMBIENTE OPERACIONAL', 'OUTRO',
+'INFRAESTRUTURA AEROPORTUÁRIA', 'ASPECTO MÉDICO', 'ERGONOMIA',
+'INFRAESTRUTURA DE TRÁFEGO AÉREO', 'ASPECTO DE PROJETO',
+'ASPECTO DE FABRICAÇÃO', 'ASPECTO DE MANUSEIO DO MATERIAL']
+
+fator_condicionante: 
+
+['OPERAÇÃO DA AERONAVE', 'INDIVIDUAL', '***',
+'MANUTENÇÃO DA AERONAVE', 'PSICOSSOCIAL', 'ORGANIZACIONAL',
+'PRESTAÇÃO DE SERVIÇOS DE TRÁFEGO AÉREO']
+
+fator_area: ['FATOR OPERACIONAL', 'FATOR HUMANO', 'OUTRO', 'FATOR MATERIAL']
+
+## Tabela Recomendação
+
+(nao sera muito util, vem dos relatorios e é especificada para cada ocorrencia ⇒ dificil categorizar para a AED)
