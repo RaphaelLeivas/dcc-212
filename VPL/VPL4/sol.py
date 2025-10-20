@@ -271,11 +271,11 @@ def bootstrap_mean(n_sub, alpha):
     col = 'NOTA_MEDIA_ESCOLA'
      
     values = np.zeros(n_sub)
-    notas = data.loc[data['DEPENDENCIA_ADMINISTRATIVA'] == 'Federal']
-    size = len(notas)
+    federal = data[data['DEPENDENCIA_ADMINISTRATIVA']=='Federal']
+    size = len(federal)
     
     for i in range(n_sub):
-        sample = notas.sample(n=size, replace=True)
+        sample = federal.sample(n=size, replace=True)
 
         # Lembre que podemos utilizar mediana, média ou qualquer outra estatística agregada
         # values[i] = sample[col].median()
@@ -291,17 +291,16 @@ def bootstrap_mean(n_sub, alpha):
     # LI = values.quantile((1 - alpha) / 2)
     # LS = values.quantile((1 - alpha) / 2 + alpha)
 
-    # LI = values.mean() - ss.norm.ppf(alpha+(1-alpha)/2).round(2) * (values.std(ddof=1) / np.sqrt(size))
-    # LS = values.mean() + ss.norm.ppf(alpha+(1-alpha)/2).round(2) * (values.std(ddof=1) / np.sqrt(size))
+    LI = np.percentile(values, ((1 - alpha) / 2 ) * 100 )
+    LS = np.percentile(values, ((1 - alpha) / 2 + alpha) * 100)
 
-    LI = np.percentile(values, (1 - alpha) / 2)
-    LS = np.percentile(values, (1 - alpha) / 2 + alpha)
+    # LI = np.percentile(values, (1 - alpha) / 2)
+    # LS = np.percentile(values, (1 - alpha) / 2 + alpha)
 
     return values, (LI, LS)
 
 # %%
 values, (LI, LS) = bootstrap_mean(n_sub=5000, alpha=0.9)
-print("Intervalo de Confianca via Bootstrap: [{}, {}]".format(LI.round(4), LS.round(4)))
 # LI.round()
 assert LI.round() == 620 or LI.round() == 621 or LI.round() == 622
 assert LS.round() == 634 or LS.round() == 635 or LS.round() == 636
