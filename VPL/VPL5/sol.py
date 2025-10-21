@@ -278,7 +278,7 @@ df[df['TEAM'].isin(['Charlotte Hornets', 'Phoenix Suns'])]
 data = df[df['TEAM'].isin(['Charlotte Hornets', 'Phoenix Suns'])]
 def t_obs(data):
   #SEU CODIGO AQUI:
-  return df.loc[df['TEAM'] == 'Phoenix Suns', 'SALARY'].mean() - df.loc[df['TEAM'] == 'Charlotte Hornets', 'SALARY'].mean()
+  return data.loc[data['TEAM'] == 'Phoenix Suns', 'SALARY'].mean() - data.loc[data['TEAM'] == 'Charlotte Hornets', 'SALARY'].mean()
 
 # %%
 result = t_obs(data)
@@ -297,8 +297,8 @@ def resposta(data):
   alpha = 0.1
   n = 10000
   column = 'SALARY'
-  df1 = df.loc[df['TEAM'] == 'Phoenix Suns']
-  df2 = df.loc[df['TEAM'] == 'Charlotte Hornets']
+  df1 = data.loc[data['TEAM'] == 'Phoenix Suns']
+  df2 = data.loc[data['TEAM'] == 'Charlotte Hornets']
 
   # bp_data = [df1[column], df2[column]]
 
