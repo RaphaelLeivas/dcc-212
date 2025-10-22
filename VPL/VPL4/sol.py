@@ -140,8 +140,14 @@ def CI(data):
     alpha = 0.99
     N = notas_escolas.shape[0]
 
-    LI = notas_escolas.mean() - ss.norm.ppf(alpha+(1-alpha)/2).round(2) * (notas_escolas.std(ddof=1) / np.sqrt(N))
-    LS = notas_escolas.mean() + ss.norm.ppf(alpha+(1-alpha)/2).round(2) * (notas_escolas.std(ddof=1) / np.sqrt(N))
+    LI = notas_escolas.mean() - ss.norm.ppf(alpha+(1-alpha)/2).round(4) * (notas_escolas.std(ddof=1) / np.sqrt(N))
+    LS = notas_escolas.mean() + ss.norm.ppf(alpha+(1-alpha)/2).round(4) * (notas_escolas.std(ddof=1) / np.sqrt(N))
+
+    # LI = np.percentile(notas_escolas, ((1 - alpha) / 2) * 100)
+    # LS = np.percentile(notas_escolas, ((1 - alpha) / 2 + alpha) * 100)
+
+    # LI = notas_escolas.quantile((1 - alpha) / 2)
+    # LS = notas_escolas.quantile((1 - alpha) / 2 + alpha)
 
     return (LI, LS)
 # array = pegue os dados
@@ -256,7 +262,7 @@ def resposta():
     # return 1 ou 2 ou 3 ou 4 ou 5 ou 6
     # Escreva sua resposta abaixo:
     # YOUR CODE HERE
-    return 3
+    return 4
 
 # %% [markdown]
 # **B)** Construa um intervalo de confiança via Bootstrap para a média da variável 'NOTA_MEDIA_ESCOLA' para escolas de 'DEPENDENCIA_ADMINISTRATIVA' **Federal**. Você deve utilizar 5000 amostras e nível de confiança de 90%.

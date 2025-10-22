@@ -24,6 +24,7 @@
 # %%
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
 from numpy.testing import assert_almost_equal
 from numpy.testing import assert_equal
@@ -41,7 +42,7 @@ for n in [10, 20, 50, 100, 1000]:
     medias.append(data.mean())
   plt.hist(medias, bins=15, rwidth=0.95)
   plt.title('N={}'.format(n))
-  plt.show()
+  # plt.show()
 
 # %% [markdown]
 # Note que a medida que aumentamos o número de médias amostradas ($n$), o histograma se modifica cada vez mais próximo de uma distribuição Normal.
@@ -92,7 +93,7 @@ for n in [10, 20, 50, 100, 1000]:
 # %%
 def z_obs(x, mu, sigma, n):
   z = (x - mu)/(sigma/np.sqrt(n))
-  return z.round(2)
+  return z.round(4)
 
 z_obs(180, 173, 30, 1)
 
@@ -146,8 +147,7 @@ def prob(x, mu, sigma, n):
 
 # %%
 p = prob(1400, 1100, 420, 1)
-p
-# assert_equal(0.2375, p.round(4))
+assert_equal(0.2375, p.round(4))
 
 # %% [markdown]
 # ## Intervalos de Confiança
@@ -214,7 +214,7 @@ def bootstrap_mean(data):
   # OS PARÂMETROS INICIAIS PODEM SER ALTERADOS A SEU GOSTO
   # SUA FUNÇÃO DEVE RETORNAR UMA TUPLA COM OS LIMITES DO IC
   # (LI, LS)
-  n_sub = 5000
+  n_sub = 10000
   size = len(data)
   values = np.zeros(n_sub)
 
@@ -223,24 +223,24 @@ def bootstrap_mean(data):
 
     # Lembre que podemos utilizar mediana, média ou qualquer outra estatística agregada
     # values[i] = sample[col].median()
-    values[i] = sample.mean()
+    values[i] = sample.mean().round(2)
 
   # Gerando valores inferior e superior para um nível de confiança de 95%
   LI = np.percentile(values, 2.5)
   LS = np.percentile(values, 97.5)
 
-  values = pd.Series(values)
+  # values = pd.Series(values)
 
-  # Compute confidence interval
-  LI = values.quantile(0.025)
-  LS = values.quantile(0.975)
+  # # Compute confidence interval
+  # LI = values.quantile(0.025)
+  # LS = values.quantile(0.975)
 
   return (LI, LS)
 
 
 # %%
 (LI, LS) = bootstrap_mean(df)
-# print(LI, LS)
+print(LI, LS)
 assert_equal(97.97, LI.round(2))
 assert_equal(98.55, LS.round(2))
 
