@@ -17,8 +17,24 @@ d2 = pd.read_csv('Q2.csv', index_col=0)
 # def dependentes(v1, v2, p, df):
 #    ...
 
+def dependentes(v1, v2, p, df):
+    # v1 = string representando o nome da coluna da primeira variável que se deseja verificar (in)dependência
+    # v2 = string representando o nome da coluna da segunda variável que se deseja verificar (in)dependência
+    # p = string representando o nome da coluna das probabilidades
+    # df = dataframe contendo o conjunto de dados
+    # P(X,Y) == P(X) * P(Y) para serem independentes (false)
+    p_x = df.groupby(v1)[p].sum()
+    p_y = df.groupby(v2)[p].sum()
+
+    for _, row in df.iterrows():
+        answer = row[p] == p_x[row[v1]] * p_y[row[v2]]
+        if answer == False:
+            return True
+
+    return False
+
 
 # Escreva o seu código aqui para calcular os valores das três variáveis
-dep_xy = None
-dep_yz = None
-dep_xz = None
+dep_xy = dependentes('x', 'y', 'P(X,Y,Z)', d2)
+dep_yz = dependentes('y', 'z', 'P(X,Y,Z)', d2)
+dep_xz = dependentes('x', 'z', 'P(X,Y,Z)', d2)
